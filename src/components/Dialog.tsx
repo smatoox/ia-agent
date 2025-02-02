@@ -9,8 +9,18 @@ export const Dialog = () => {
     return <div>
         {currentConversation?.messages.map((message) => (
             <div key={message.id} style={{ display: 'flex', flexDirection: message.role === 'ia' ? 'row' : 'row-reverse' }}>
-                <div style={{ backgroundColor: message.role === 'user' ? 'blue' : 'red', padding: '10px', borderRadius: '5px' }}>
-                    {message.content}
+                <div 
+                    style={{ 
+                        backgroundColor: message.role === 'user' ? 'blue' : 'red', 
+                        padding: '10px', 
+                        borderRadius: '5px' 
+                    }}
+                >
+                    {message.role === 'ia' ? (
+                        <p style={{ margin: 0 }} dangerouslySetInnerHTML={{ __html: message.content }} />
+                    ) : (
+                        <p style={{ margin: 0 }}>{message.content}</p>
+                    )}
                 </div>
             </div>
         ))}

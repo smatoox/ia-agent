@@ -1,6 +1,7 @@
 import { useAtom } from "jotai";
 import { useCallback, useState } from "react";
 import { conversationsAtom, currentConversationIdAtom, IConversation, IMessage } from "./conversationsAtoms";
+import { getAIResponse } from './fakeBrain';
 
 export const useConversations = () => {
     const [loading, setLoading] = useState(false);
@@ -41,7 +42,25 @@ export const useConversations = () => {
             )
         );
 
-        // todo Simulation de la réponse IA
+        // Obtention de la réponse IA depuis fakeBrain
+        const aiResponse = getAIResponse(message);
+
+        // Création de la réponse IA
+        const aiMessage: IMessage = {
+            id: crypto.randomUUID(),
+            date: new Date(),
+            content: aiResponse,
+            role: 'ia'
+        };
+
+        // Ajout de la réponse à la conversation
+        setConversations(prevConversations => 
+            prevConversations.map(conv => 
+                conv.id === conversationId
+                    ? { ...conv, messages: [...conv.messages, aiMessage] }
+                    : conv
+            )
+        );
 
         setLoading(false);
     }, [currentConversationId, conversations]);
