@@ -6,7 +6,7 @@ export const ConversationList = () => {
     const conversations = useAtomValue(conversationsAtom);
 
     return (
-        <ul>
+        <ul className="conversationsList">
             {conversations.map((conversation) => (
                 <li key={conversation.id}>
                     <ButtonSelectConversation 

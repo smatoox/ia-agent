@@ -6,14 +6,16 @@ import './scss/_app.scss'
 
 function App() {
   return (
-    <div className="app" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '75dvw', height: '50dvh', margin: '12.5dvh auto', border: '1px solid black' }}>
-      <div style={{ width: '300px' }}>
-        <ButtonNewConversation />
+    <div className="main">
+      <div className='main__sidebar'>
         <ConversationList />
       </div>
-      <div style={{ width: 'calc(100% - 300px)' }}>
+      <div className='main__dialog'>
           <Dialog />
-          <ChatBar />
+          <div className='main__actions'>
+            <ButtonNewConversation />
+            <ChatBar />
+          </div>
       </div>
     </div>
   )

@@ -1,8 +1,13 @@
 import { currentConversationIdAtom } from "../utils/conversationsAtoms";
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
+import { memo } from "react";
 
-export const ButtonSelectConversation = ({ id, date, firstMessage }: { id: string, date: Date, firstMessage: string }) => {
-    const setCurrentConversationId = useSetAtom(currentConversationIdAtom);
+export const ButtonSelectConversation = memo(({ id, date, firstMessage }: { 
+    id: string, 
+    date: Date, 
+    firstMessage: string 
+}) => {
+    const [currentConversationId, setCurrentConversationId] = useAtom(currentConversationIdAtom);
     
     const handleClick = () => {
         setCurrentConversationId(id);
@@ -18,9 +23,9 @@ export const ButtonSelectConversation = ({ id, date, firstMessage }: { id: strin
     }
 
     return (
-        <button onClick={handleClick}>
-            <span>{showDateConversation(date)}</span>
-            <span>{firstMessage}</span>
-        </button>
+        <a className={`buttonSelectConversation ${currentConversationId === id ? 'buttonSelectConversation--active' : ''}`} role="button" onClick={handleClick}>
+            <span className="buttonSelectConversation__date">{showDateConversation(date)}</span>
+            <span className="buttonSelectConversation__message">{firstMessage}</span>
+        </a>
     );
-}
+});

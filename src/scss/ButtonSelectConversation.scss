@@ -1,0 +1,32 @@
+.buttonSelectConversation {
+    display: block;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: #fff;
+    text-decoration: none;
+
+    &--active {
+        color: #fff;
+
+        .buttonSelectConversation__message {
+            font-weight: bold;
+        }
+    }
+
+    &__date {
+        display: block;
+        font-size: 10px;
+        color: #666;
+    }
+
+    &__message {
+        display: block;
+        font-size: 14px;
+        color: #333;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+    }
+    
+}

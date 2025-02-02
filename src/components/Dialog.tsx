@@ -1,28 +1,39 @@
 import { useAtomValue } from "jotai";
 import { conversationsAtom, currentConversationIdAtom } from "../utils/conversationsAtoms";
+import { useEffect, useRef } from "react";
 
 export const Dialog = () => {
     const currentConversationId = useAtomValue(currentConversationIdAtom);
     const conversations = useAtomValue(conversationsAtom);
     const currentConversation = conversations.find((conversation) => conversation.id === currentConversationId);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
-    return <div>
-        {currentConversation?.messages.map((message) => (
-            <div key={message.id} style={{ display: 'flex', flexDirection: message.role === 'ia' ? 'row' : 'row-reverse' }}>
-                <div 
-                    style={{ 
-                        backgroundColor: message.role === 'user' ? 'blue' : 'red', 
-                        padding: '10px', 
-                        borderRadius: '5px' 
-                    }}
-                >
+    useEffect(() => {
+        // Attendre que le DOM soit mis à jour
+        const timeoutId = setTimeout(() => {
+            if (wrapperRef.current) {
+                const element = wrapperRef.current;
+                element.scrollTop = element.scrollHeight;
+            }
+        }, 100);
+
+        return () => clearTimeout(timeoutId);
+    }, [conversations, currentConversation]);
+
+    return (
+        <div className="dialog" ref={wrapperRef}>
+            <div className="dialog__message dialog__message--ia">
+                <p>Comment puis-je t'aider ? Une commande "help" me permettra de te donner des informations sur mes capacités.</p>
+            </div>
+            {currentConversation?.messages.map((message) => (
+                <div className={`dialog__message dialog__message--${message.role}`} key={message.id}>
                     {message.role === 'ia' ? (
-                        <p style={{ margin: 0 }} dangerouslySetInnerHTML={{ __html: message.content }} />
+                        <p dangerouslySetInnerHTML={{ __html: message.content }} />
                     ) : (
-                        <p style={{ margin: 0 }}>{message.content}</p>
+                        <p>{message.content}</p>
                     )}
                 </div>
-            </div>
-        ))}
-    </div>
+            ))}
+        </div>
+    );
 }

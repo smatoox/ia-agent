@@ -1,0 +1,39 @@
+@use 'sass:color';
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto;
+    flex-grow: 1;
+    height: 100%;
+    scroll-behavior: smooth;
+
+    &__message {
+        display: inline-block;
+        margin: 18px 20px 6px;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+        max-width: 80%;
+
+        &--user {
+            background-color: #62d0ff;
+            border-bottom-right-radius: 0;
+            box-shadow: 3px 4px 0px 0 #218ebd;
+        }
+
+        &--ia {
+            background-color: #88ffcf;
+            border-bottom-left-radius: 0;
+            box-shadow: -3px 4px 0px 0 #6ac7a2;
+        }
+    }
+    &__message--user {
+        align-self: flex-end;
+    }
+
+    &__message--ia {
+        align-self: flex-start;
+    }
+}
