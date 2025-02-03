@@ -8,6 +8,7 @@
 @use 'Dialog.scss';
 @use 'ButtonNewConversation.scss';
 @use 'ChatBar.scss';
+
 body {
     background-color: #dcdcdc;
     overflow: hidden;
@@ -35,23 +36,64 @@ body {
     }
 
     &__sidebar {
-        background-color: color.adjust(#fff, $alpha: -0.8);
-        width: 75%;
-        height: 100%;
+        backdrop-filter: blur(2px);
+        background-color: color.adjust(#414141, $alpha: -0.3);
+        width: calc(100% - 40px);
+        height: calc(100% - 130px);
         overflow-y: auto;
-        border-radius: v.$radiusInside;
+        padding: 100px 10px 10px 10px;
         position: absolute;
         top: 0;
         left: 0;
         opacity: 0;
         transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        z-index: 1;
+
+        &.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
         @include b.tablet() {
+            padding: 0;
+            background-color: color.adjust(#fff, $alpha: -0.8);
             opacity: 1;
             transform: translateX(0);
             position: relative;
+            height: 100%;
             width: 300px;
+            border-radius: v.$radiusInside;
+        }
+
+        &--toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            flex-shrink: 0;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            background-color: #fff;
+            border-radius: v.$radiusInside;
+            width: 40px;
+            height: 40px;
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+            svg {
+                transition: transform 0.3s ease-in-out;
+            }
+            
+            &.active {
+                svg {
+                    transform: rotate(180deg);
+                }
+            }
+
+            @include b.tablet() {
+                display: none;
+            }
         }
     }
 
