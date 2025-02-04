@@ -11,9 +11,15 @@ A React TypeScript project built with Vite that implements an AI chat interface.
 
 ## Features
 
-- Chat interface with **fake AI**
 - Conversation persistence using localStorage through Jotai
 - Real-time render visualization with React Scan
+
+## Branches
+
+The project has two main branches:
+
+- `main`: Contains a basic AI agent that detects keywords to provide appropriate responses (fake AI)
+- `openai`: Integrates OpenAI's API using the "gpt-4o-mini-2024-07-18" model for more intelligent responses
 
 ## Installation & Usage
 
