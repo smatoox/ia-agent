@@ -1,9 +1,10 @@
 import { useAtom } from "jotai";
 import { useCallback, useState } from "react";
 import { conversationsAtom, currentConversationIdAtom, IConversation, IMessage } from "./conversationsAtoms";
-import { getAIResponse } from './fakeBrain';
+import { useOpenAI } from "./useInitOpenAi";
 
 export const useConversations = () => {
+    const openai = useOpenAI();
     const [loading, setLoading] = useState(false);
     const [conversations, setConversations] = useAtom(conversationsAtom);
     const [currentConversationId, setCurrentConversationId] = useAtom(currentConversationIdAtom);
@@ -34,16 +35,27 @@ export const useConversations = () => {
         };
 
         // Ajout du message à la conversation
-        setConversations(prevConversations => 
-            prevConversations.map(conv => 
+        setConversations(prevConversations =>
+            prevConversations.map(conv =>
                 conv.id === conversationId
                     ? { ...conv, messages: [...conv.messages, newUserMessage] }
                     : conv
             )
         );
 
-        // Obtention de la réponse IA depuis fakeBrain
-        const aiResponse = getAIResponse(message);
+        let aiResponse = '';
+        try {
+            const completion = await openai?.chat.completions.create({
+                messages: [{ role: 'user', content: message }],
+                model: 'gpt-4o-mini-2024-07-18', // Essayez ce modèle par défaut d'Anthropic
+            });
+
+            aiResponse = completion?.choices[0].message.content || '';
+            setLoading(false);
+        } catch (error) {
+            console.error('Erreur:', error);
+            setLoading(false);
+        }
 
         // Création de la réponse IA
         const aiMessage: IMessage = {
@@ -54,8 +66,8 @@ export const useConversations = () => {
         };
 
         // Ajout de la réponse à la conversation
-        setConversations(prevConversations => 
-            prevConversations.map(conv => 
+        setConversations(prevConversations =>
+            prevConversations.map(conv =>
                 conv.id === conversationId
                     ? { ...conv, messages: [...conv.messages, aiMessage] }
                     : conv
