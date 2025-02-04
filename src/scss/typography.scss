@@ -1,3 +1,5 @@
+@use 'variables.scss' as v;
+
 body {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 16px;
@@ -11,5 +13,5 @@ p {
 }
 
 a {
-    color: #326d55
+    color: v.$color-secondary-light;
 }

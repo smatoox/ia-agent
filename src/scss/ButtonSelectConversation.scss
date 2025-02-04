@@ -1,12 +1,14 @@
+@use 'variables.scss' as v;
+
 .buttonSelectConversation {
     display: block;
     padding: 8px;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: v.$color-white;
     text-decoration: none;
 
     &--active {
-        color: #fff;
+        color: v.$color-white;
 
         .buttonSelectConversation__message {
             font-weight: bold;
@@ -16,13 +18,13 @@
     &__date {
         display: block;
         font-size: 10px;
-        color: #666;
+        color: v.$color-gray-text;
     }
 
     &__message {
         display: block;
         font-size: 14px;
-        color: #333;
+        color: v.$color-gray-text-dark;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;

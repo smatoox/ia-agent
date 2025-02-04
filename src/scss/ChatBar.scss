@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use 'variables.scss' as v;
+
 .chatBar {
     display: flex;
     flex-direction: row;
@@ -10,13 +13,17 @@
         padding: 0 10px;
         border-radius: 30px;
         border: none;
-        background-color: #fff;
-        color: #62d0ff;
+        background-color: v.$color-white;
+        color: v.$color-primary;
         width: 50%;
 
         &::placeholder {
-            color: #a0e3ff;
+            color: v.$color-primary-light;
         }
+    }
+
+    &__buttonContainer {
+        position: relative;
     }
 
     &__button {
@@ -30,8 +37,41 @@
         padding: 0 10px;
         border-radius: 30px;
         border: none;
-        background-color: #fff;
-        color: #62d0ff;
+        background-color: v.$color-white;
+        color: v.$color-primary;
         cursor: pointer;
     }
+
+    &__loader {
+        width: 20px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: v.$color-primary;
+        box-shadow: 0 0 0 0 v.$color-primary;
+        animation: l2 1.5s infinite linear;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 0 0 v.$color-primary;
+            animation: inherit;
+        }
+        &:before {
+            animation-delay: -0.5s;
+        }
+        &:after {
+            animation-delay: -1s;
+        }
+    }
+}
+
+@keyframes l2 {
+    100% {box-shadow: 0 0 0 40px color.adjust(v.$color-primary, $alpha: -0.8)}
 }

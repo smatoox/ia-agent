@@ -1,2 +1,34 @@
 $radius: 23px;
 $radiusInside: 17px;
+
+// Colors
+$color-primary: #62d0ff;
+$color-primary-dark: #218ebd;
+$color-primary-light: #a0e3ff;
+
+$color-secondary: #88ffcf;
+$color-secondary-dark: #6ac7a2;
+$color-secondary-light: #326d55;
+
+$color-white: #fff;
+$color-black: #000;
+
+$color-gray-light: #f4f4f4;
+$color-gray: #dcdcdc;
+$color-gray-dark: #414141;
+$color-gray-text: #666;
+$color-gray-text-dark: #333;
+
+// Background gradient colors
+$gradient-colors: (
+    $color-primary-dark,
+    $color-secondary,
+    $color-primary,
+    $color-secondary-dark,
+    $color-primary
+);
+
+// Shadows
+$shadow-default: 0 3px 13px 6px rgba($color-black, 0.2);
+$shadow-button-right: 3px 4px 0px 0 $color-primary-dark;
+$shadow-button-left: -3px 4px 0px 0 $color-secondary-dark;

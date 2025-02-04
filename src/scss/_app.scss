@@ -10,7 +10,7 @@
 @use 'ChatBar.scss';
 
 body {
-    background-color: #dcdcdc;
+    background-color: v.$color-gray;
     overflow: hidden;
 }
 
@@ -19,7 +19,7 @@ body {
     flex-direction: row;
     gap: 10px;
     padding: 10px;
-    background: linear-gradient(60deg,#218ebd,#88ffcf,#62d0ff,#6ac7a2,#62d0ff);
+    background: linear-gradient(60deg, v.$gradient-colors);
     background-size: 300% 300%;
     animation: gradient-animation 30s ease infinite;
     margin: 0;
@@ -27,8 +27,10 @@ body {
     height: 100dvh;
     max-width: 1000px;
     position: relative;
+    box-shadow: v.$shadow-default;
 
     @include b.tablet() {
+        width: calc(100% - 20px);
         height: calc(100dvh - 100px);
         margin: 40px auto;
         border-radius: v.$radius;
@@ -37,7 +39,7 @@ body {
 
     &__sidebar {
         backdrop-filter: blur(2px);
-        background-color: color.adjust(#414141, $alpha: -0.3);
+        background-color: color.adjust(v.$color-gray-dark, $alpha: -0.3);
         width: calc(100% - 40px);
         height: calc(100% - 130px);
         overflow-y: auto;
@@ -57,7 +59,7 @@ body {
 
         @include b.tablet() {
             padding: 0;
-            background-color: color.adjust(#fff, $alpha: -0.8);
+            background-color: color.adjust(v.$color-white, $alpha: -0.8);
             opacity: 1;
             transform: translateX(0);
             position: relative;
@@ -75,7 +77,7 @@ body {
             top: 20px;
             left: 20px;
             z-index: 2;
-            background-color: #fff;
+            background-color: v.$color-white;
             border-radius: v.$radiusInside;
             width: 40px;
             height: 40px;
@@ -98,7 +100,7 @@ body {
     }
 
     &__dialog {
-        background-color: #f4f4f4;
+        background-color: v.$color-gray-light;
         display: flex;
         flex-direction: column;
         border-radius: v.$radiusInside;

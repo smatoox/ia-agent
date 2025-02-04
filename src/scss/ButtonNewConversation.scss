@@ -1,13 +1,15 @@
+@use 'variables.scss' as v;
+
 .buttonNewConversation {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: v.$color-white;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #62d0ff;
+    color: v.$color-primary;
 
     svg {
         width: 20px;
